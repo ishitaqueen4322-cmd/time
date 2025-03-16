@@ -1,20 +1,20 @@
-<h2>Merkmale</h2>
+<h2>Funktionen</h2>
 <ul>
-<li>Moderner und benutzerfreundlicher Interface</li>
+<li>Modernes und benutzerfreundliches Interface</li>
 </ul>
 <h3>Wecker</h3>
 <ul>
 <li>Anpassbare Zeitpläne (täglich, wöchentlich, bestimmte Wochentage, bestimmte Daten, Datumsbereich)</li>
-<li>Anpassbare Melodie, ansteigende Lautstärke und Vibrationen</li>
-<li>Anpassbare Schlummerdauer und maximale Schlummeranzahl</li>
+<li>Anpassbare Melodie, ansteigende Lautstärke und Vibration</li>
+<li>Anpassbare Snoozedauer und maximale Snoozeanzahl</li>
 <li>Wecker-Aufgaben (Matheaufgaben, Text neu eingeben, Sequenz, weitere folgen)</li>
 <li>Wecker filtern (alle, heute, morgen, pausiert, deaktiviert, abgeschlossen)</li>
 </ul>
 <h3>Uhr</h3>
 <ul>
-<li>Anpassbare Anzeige der Uhrzeit</li>
-<li>Weltuhren mit relativer Zeitdifferenz</li>
-<li>Suchen und hinzufügen von Städten</li>
+<li>Anpassbares Uhrdesign</li>
+<li>Weltzeit mit relativer Zeitdifferenz</li>
+<li>Suche und füge Städte hinzu</li>
 </ul>
 <h3>Timer</h3>
 <ul>
@@ -30,6 +30,6 @@
 <h3>Darstellung</h3>
 <ul>
 <li>Material You Thema</li>
-<li>Stark anpassbare Farbthemen</li>
-<li>Stark anpassbare Stilthemen</li>
+<li>Stark anpassbare Farbthemes</li>
+<li>Stark anpassbare Stilthemes</li>
 </ul>
