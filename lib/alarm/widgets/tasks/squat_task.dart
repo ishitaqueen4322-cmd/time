@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:sensors_plus/sensors_plus.dart';
 import 'package:clock_app/common/widgets/card_container.dart';
 import 'package:clock_app/settings/types/setting_group.dart';
 import 'package:flutter/material.dart';
@@ -22,53 +23,94 @@ class SquatTask extends StatefulWidget {
 class _SquatTaskState extends State<SquatTask> with TickerProviderStateMixin {
   late final int numberOfSquats =
       widget.settings.getSetting("numberOfSquats").value.toInt();
+  late final StreamSubscription<AccelerometerEvent> _accelStream;
+  late final StreamSubscription<BarometerEvent> _barStream;
 
-  late List<CardModel> _cards;
-  CardModel? _firstCard;
-  bool _isWaiting = false;
+  final List<BarometerEvent> barometerSamples = [];
+  final List<AccelerometerEvent> accelerometerSamples = [];
+
+  late int squatsCompleted = 0;
 
   @override
   void initState() {
     super.initState();
-    _initializeCards();
+    _accelStream = accelerometerEventStream(
+            samplingPeriod: const Duration(milliseconds: 50))
+        .listen((AccelerometerEvent event) {
+      accelerometerSamples.add(event);
+      _dropOldSensorEvents();
+      _updateSquatSensorData();
+    });
+    _barStream =
+        barometerEventStream(samplingPeriod: const Duration(milliseconds: 50))
+            .listen((BarometerEvent event) {
+      barometerSamples.add(event);
+      _dropOldSensorEvents();
+      _updateSquatSensorData();
+    });
   }
 
+  double oldAccelSecond = 0.0;
 
-  void _onCardTap(CardModel card) {
-    if (_isWaiting || card.isFlipped) return;
+  void _updateSquatSensorData() {
+    double accelSecond = _lowPassAccel();
 
-    setState(() {
-      card.isFlipped = true;
-    });
-
-    if (_firstCard == null) {
-      _firstCard = card;
-    } else {
-      if (_firstCard!.value == card.value) {
-        // Match found
-        _firstCard!.isCompleted = true;
-        card.isCompleted = true;
-        _firstCard = null;
-
-        if (_cards.every((card) => card.isFlipped)) {
-          // All cards are flipped
-          Future.delayed(const Duration(seconds: 1), () {
-            widget.onSolve();
-          });
-        }
+    if (oldAccelSecond > 11.0 && accelSecond <= 11.0) {
+      final int squats = squatsCompleted + 1;
+      if (squats >= numberOfSquats) {
+        widget.onSolve();
       } else {
-        // No match, flip back after delay
-        _isWaiting = true;
-        Future.delayed(const Duration(seconds: 1), () {
-          setState(() {
-            card.isFlipped = false;
-            _firstCard!.isFlipped = false;
-            _firstCard = null;
-            _isWaiting = false;
-          });
+        setState(() {
+          squatsCompleted = squats;
         });
       }
     }
+
+    oldAccelSecond = accelSecond;
+  }
+
+  double _lowPassAccel() {
+    //use an average to put a low pass filter on the last second's worth of data
+    double avg = 0.0;
+    double count = 0.0;
+
+    DateTime oldest =
+        DateTime.now().subtract(const Duration(milliseconds: 500));
+
+    for (AccelerometerEvent accel in accelerometerSamples.reversed) {
+      count++;
+      avg += (accel.y - avg) / count;
+
+      if (accel.timestamp.isBefore(oldest)) break;
+    }
+
+    return avg;
+  }
+
+  void _dropOldSensorEvents() {
+    DateTime oldestNonDropped =
+        DateTime.now().subtract(const Duration(milliseconds: 4000));
+
+    int accelerometerFirstValidIndex = accelerometerSamples
+        .indexWhere((samp) => samp.timestamp.isAfter(oldestNonDropped));
+    if (accelerometerFirstValidIndex == -1) {
+      accelerometerFirstValidIndex = accelerometerSamples.length;
+    }
+    accelerometerSamples.removeRange(0, accelerometerFirstValidIndex);
+
+    int barometerFirstValidIndex = barometerSamples
+        .indexWhere((samp) => samp.timestamp.isAfter(oldestNonDropped));
+    if (barometerFirstValidIndex == -1) {
+      barometerFirstValidIndex = barometerSamples.length;
+    }
+    barometerSamples.removeRange(0, barometerFirstValidIndex);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _accelStream.cancel();
+    _barStream.cancel();
   }
 
   @override
@@ -76,63 +118,34 @@ class _SquatTaskState extends State<SquatTask> with TickerProviderStateMixin {
     ThemeData theme = Theme.of(context);
     ColorScheme colorScheme = theme.colorScheme;
     TextTheme textTheme = theme.textTheme;
-    int gridSize = (sqrt(_cards.length)).floor();
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
+          Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              textBaseline: TextBaseline.alphabetic,
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              children: [
+                Text(
+                  squatsCompleted.toString(),
+                  style: textTheme.displayLarge,
+                ),
+                Text(
+                  "/",
+                  style: textTheme.displayMedium,
+                ),
+                Text(
+                  numberOfSquats.toString(),
+                  style: textTheme.displayMedium,
+                ),
+              ]),
           Text(
-            "Match card pairs",
-            style: textTheme.headlineMedium,
+            "Squats Completed",
+            style: textTheme.headlineLarge,
           ),
           const SizedBox(height: 16.0),
-          SizedBox(
-            width: double.infinity,
-            // height: 512,
-            child: GridView.builder(
-              itemCount: _cards.length,
-              shrinkWrap: true,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: gridSize,
-              ),
-              itemBuilder: (context, index) {
-                CardModel card = _cards[index];
-                return GestureDetector(
-                  key: ValueKey(card),
-                  onTap: () => _onCardTap(card),
-                  child: FlipCard(
-                    isFlipped: card.isFlipped,
-                    front: CardContainer(
-                      margin: const EdgeInsets.all(4.0),
-                      color: colorScheme.primary,
-                      child: Center(
-                        child: Text(
-                          '?',
-                          style: textTheme.displayMedium?.copyWith(
-                            color: colorScheme.onPrimary,
-                          ),
-                        ),
-                      ),
-                    ),
-                    back: CardContainer(
-                      margin: const EdgeInsets.all(4.0),
-                      color: card.isCompleted ? Colors.green : Colors.orangeAccent,
-                      child: Center(
-                        child: Text(
-                          '${card.value}',
-                          style: textTheme.displayMedium?.copyWith(
-                            color: Colors.white,
-                                                      
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
         ],
       ),
     );
