@@ -116,4 +116,14 @@ Map<AlarmTaskType, AlarmTaskSchema> alarmTaskSchemasMap = {
       return MemoryTask(onSolve: onSolve, settings: settings);
     },
   ),
+  AlarmTaskType.squat: AlarmTaskSchema(
+    (context) => "Squats",
+    SettingGroup("squatSettings",
+        (context) => "Squats", [
+          NumberSetting("numberOfSquats", (context) => "Number of Squats", 10),
+    ]),
+    (onSolve, settings) {
+      return SquatTask(onSolve: onSolve, settings: settings);
+    },
+  ),
 };
