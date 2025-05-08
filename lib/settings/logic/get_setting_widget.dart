@@ -14,6 +14,7 @@ import 'package:clock_app/settings/widgets/dynamic_select_setting_card.dart';
 import 'package:clock_app/settings/widgets/dynamic_toggle_setting_card.dart';
 import 'package:clock_app/settings/widgets/list_setting_card.dart';
 import 'package:clock_app/settings/widgets/multi_select_setting_card.dart';
+import 'package:clock_app/settings/widgets/number_setting_card.dart';
 import 'package:clock_app/settings/widgets/select_setting_card.dart';
 import 'package:clock_app/settings/widgets/setting_action_card.dart';
 import 'package:clock_app/settings/widgets/setting_page_link_card.dart';
@@ -169,6 +170,12 @@ Widget? getSettingItemWidget(
       );
     } else if (item is DateTimeSetting) {
       return DateSettingCard(
+        setting: item,
+        showAsCard: showAsCard,
+        onChanged: onChanged,
+      );
+    } else if (item is NumberSetting) {
+      return NumberSettingCard(
         setting: item,
         showAsCard: showAsCard,
         onChanged: onChanged,

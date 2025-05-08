@@ -3,6 +3,7 @@ import 'package:clock_app/alarm/widgets/tasks/math_task.dart';
 import 'package:clock_app/alarm/widgets/tasks/memory_task.dart';
 import 'package:clock_app/alarm/widgets/tasks/retype_task.dart';
 import 'package:clock_app/alarm/widgets/tasks/sequence_task.dart';
+import 'package:clock_app/alarm/widgets/tasks/squat_task.dart';
 import 'package:clock_app/settings/types/setting.dart';
 import 'package:clock_app/settings/types/setting_group.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
