@@ -11,7 +11,8 @@ enum AlarmTaskType {
   sequence,
   shake,
   memory,
-  squat
+  squat, 
+  lightSensor
 }
 
 typedef AlarmTaskBuilder = Widget Function(

@@ -1,4 +1,5 @@
 import 'package:clock_app/alarm/types/alarm_task.dart';
+import 'package:clock_app/alarm/widgets/tasks/light_task.dart';
 import 'package:clock_app/alarm/widgets/tasks/math_task.dart';
 import 'package:clock_app/alarm/widgets/tasks/memory_task.dart';
 import 'package:clock_app/alarm/widgets/tasks/retype_task.dart';
@@ -124,6 +125,16 @@ Map<AlarmTaskType, AlarmTaskSchema> alarmTaskSchemasMap = {
     ]),
     (onSolve, settings) {
       return SquatTask(onSolve: onSolve, settings: settings);
+    },
+  ),
+  AlarmTaskType.lightSensor: AlarmTaskSchema(
+    (context) => "Light Sensor",
+    SettingGroup("lightSensorSettings",
+        (context) => "Required Light Level (lux)", [
+          SliderSetting("targetLux", (context) => "Required Light Level (lux)", 0, 200, 100),
+    ]),
+    (onSolve, settings) {
+      return LightTask(onSolve: onSolve, settings: settings);
     },
   ),
 };
