@@ -4,19 +4,10 @@ import 'package:clock_app/audio/types/ringtone_player.dart';
 import 'package:clock_app/common/types/file_item.dart';
 import 'package:clock_app/common/utils/list_storage.dart';
 import 'package:clock_app/common/utils/snackbar.dart';
-import 'package:clock_app/common/widgets/fab.dart';
-import 'package:clock_app/common/widgets/file_item_card.dart';
-import 'package:clock_app/common/widgets/list/persistent_list_view.dart';
-import 'package:clock_app/developer/logic/logger.dart';
 import 'package:clock_app/navigation/widgets/app_top_bar.dart';
-import 'package:clock_app/settings/types/setting_item.dart';
-import 'package:clock_app/system/data/device_info.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart' as path;
 import 'package:record/record.dart';
 
@@ -47,15 +38,15 @@ class _RecordRingtoneScreenState extends State<RecordRingtoneScreen> {
     super.dispose();
   }
 
-  void _toggleRecord() {
+  void _toggleRecord(BuildContext context) {
     if (recording) {
-      _stopRecord();
+      _stopRecord(context);
     } else {
-      _beginRecord();
+      _beginRecord(context);
     }
   }
 
-  void _stopRecord() async {
+  void _stopRecord(BuildContext context) async {
     if (!recording || recordingStart == null) return;
 
     try {
@@ -70,10 +61,16 @@ class _RecordRingtoneScreenState extends State<RecordRingtoneScreen> {
             FileItemType.audio),
       );
       await saveList("ringtones", ringtoneList);
+      if(context.mounted) {
+        showSnackBar(context, AppLocalizations.of(context)!.melodyRecorderOnSaved);
+      }
     } catch (ex) {
       //this version of `record` is the latest that works
       //with sdk level 21, but it has an issue where spurious
       //errors can be thrown when stopping the record.
+      if(context.mounted) {
+        showSnackBar(context, AppLocalizations.of(context)!.melodyRecorderOnError, error: true);
+      }
     } finally {
       setState(() {
         recording = false;
@@ -81,7 +78,7 @@ class _RecordRingtoneScreenState extends State<RecordRingtoneScreen> {
     }
   }
 
-  void _beginRecord() async {
+  void _beginRecord(BuildContext context) async {
     if (recording) return;
 
     if (await recorder.hasPermission()) {
@@ -100,6 +97,9 @@ class _RecordRingtoneScreenState extends State<RecordRingtoneScreen> {
       final filename = path.join(folderPath.path, "Recording-$time-$rand.m4a");
 
       await recorder.start(path: filename);
+      if(context.mounted) {
+        showSnackBar(context, AppLocalizations.of(context)!.melodyRecorderOnStart);
+      }
     }
   }
 
@@ -124,7 +124,7 @@ class _RecordRingtoneScreenState extends State<RecordRingtoneScreen> {
                     customBorder: const CircleBorder(),
                     highlightColor: Colors.red,
                     splashColor: Colors.red,
-                    onTap: () => _toggleRecord(),
+                    onTap: () => _toggleRecord(context),
                     child: Padding(
                         padding: const EdgeInsets.all(40.0),
                         child: Icon(recording ? Icons.stop : Icons.mic,
