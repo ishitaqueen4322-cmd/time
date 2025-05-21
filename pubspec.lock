@@ -953,6 +953,54 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.5"
+  record:
+    dependency: "direct main"
+    description:
+      name: record
+      sha256: "7d29f4d8a27caafa6d5c0740aeefb49a73f995b7c385a469d9ef7b3e3764035c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.3.3"
+  record_linux:
+    dependency: transitive
+    description:
+      name: record_linux
+      sha256: "4e1e22666956c360a3c4b0c32651610fd9591d339fc5771153c549756dfc775d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.2"
+  record_macos:
+    dependency: transitive
+    description:
+      name: record_macos
+      sha256: "1b107e05c04ee93846b30b7778f6f0b89a33b994a336eac4f489540226202dc6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.1"
+  record_platform_interface:
+    dependency: transitive
+    description:
+      name: record_platform_interface
+      sha256: "6dcae5252ff7157c5f5b3117014cc4c4e267736042b13b5bf736518cddf401a6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.0"
+  record_web:
+    dependency: transitive
+    description:
+      name: record_web
+      sha256: "2954f67af2c2aef960cbd8c8fbefaeee0244697d9a7d6b15d887e54d9301372b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.0"
+  record_windows:
+    dependency: transitive
+    description:
+      name: record_windows
+      sha256: e0b78b6f336880852257d1fe8d06441d1bdb24524c6a9c3aee562e4a7232152b
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.6.1"
   rxdart:
     dependency: transitive
     description:

@@ -88,6 +88,8 @@ dependencies:
   mime: ^1.0.6
   analog_clock: ^0.1.1
   animated_analog_clock: ^0.1.0
+  #Latest version that supports current Android SDK version
+  record: 4.3.3 
   # animated_reorderable_list: ^1.1.1
   # animated_reorderable_list:
     # path: "../animated_reorderable_list"
