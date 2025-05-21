@@ -51,18 +51,101 @@ class _SquatTaskState extends State<SquatTask> with TickerProviderStateMixin {
   }
 
   double oldAccelSecond = 0.0;
+  DateTime? lastSquatTime;
+  String falseSquatAdmonish = "";
+
+  bool _isFakeSquat(DateTime start, DateTime end) {
+    double average_accel_z = 0.0;
+    double average_accel_x = 0.0;
+    double count = 0.0;
+
+    double avg_jerk_y = 0.0;
+
+    double squatTimeSeconds =
+        end.difference(start).inMilliseconds.toDouble() / 1000.0;
+
+    double barMin = double.infinity;
+    double barMax = double.negativeInfinity;
+
+    for (BarometerEvent bar in barometerSamples.reversed) {
+      if (bar.timestamp.isAfter(end)) continue;
+      if (bar.timestamp.isBefore(start)) break;
+
+      barMin = min(bar.pressure, barMin);
+      barMax = max(bar.pressure, barMax);
+    }
+
+    final double barRange = barMax - barMin;
+
+    AccelerometerEvent nextEvent = accelerometerSamples.last;
+    for (AccelerometerEvent accel in accelerometerSamples.reversed) {
+      if (accel.timestamp.isAfter(end)) continue;
+      if (accel.timestamp.isBefore(start)) break;
+
+      count++;
+      average_accel_z += (accel.z - average_accel_z) / count;
+      average_accel_x += (accel.x - average_accel_x) / count;
+
+      final Duration timeDifference =
+          nextEvent.timestamp.difference(accel.timestamp);
+      final double dtSeconds =
+          (timeDifference.inMilliseconds.toDouble() / 1000.0);
+
+      final jerk_y = (nextEvent.y - accel.y) / dtSeconds;
+      avg_jerk_y += (jerk_y - avg_jerk_y) / count;
+
+      nextEvent = accel;
+    }
+
+    if(barRange <= 0.05) {
+      setState(() {
+        falseSquatAdmonish = "Make sure to have a full range of motion!";
+      });
+      return true;
+    }
+
+    if (squatTimeSeconds <= 1.0) {
+      setState(() {
+        falseSquatAdmonish = "Move slower!";
+      });
+      return true;
+    }
+
+    if (average_accel_z.abs() >= 2 || average_accel_x.abs() >= 2) {
+      setState(() {
+        falseSquatAdmonish = "Keep your phone steady and vertical!";
+      });
+      return true;
+    }
+
+    if (avg_jerk_y.abs() >= 0.1) {
+      setState(() {
+        falseSquatAdmonish = "Be steady with your movement!";
+      });
+      return true;
+    }
+
+    setState(() {
+      falseSquatAdmonish = "";
+    });
+    return false;
+  }
 
   void _updateSquatSensorData() {
     double accelSecond = _lowPassAccel();
 
-    if (oldAccelSecond > 11.0 && accelSecond <= 11.0) {
-      final int squats = squatsCompleted + 1;
-      if (squats >= numberOfSquats) {
-        widget.onSolve();
-      } else {
-        setState(() {
-          squatsCompleted = squats;
-        });
+    if (oldAccelSecond > 10.5 && accelSecond <= 10.5) {
+      if (lastSquatTime == null ||
+          !_isFakeSquat(lastSquatTime!, DateTime.now())) {
+        final int squats = squatsCompleted + 1;
+        lastSquatTime = DateTime.now();
+        if (squats >= numberOfSquats) {
+          widget.onSolve();
+        } else {
+          setState(() {
+            squatsCompleted = squats;
+          });
+        }
       }
     }
 
@@ -75,7 +158,7 @@ class _SquatTaskState extends State<SquatTask> with TickerProviderStateMixin {
     double count = 0.0;
 
     DateTime oldest =
-        DateTime.now().subtract(const Duration(milliseconds: 500));
+        DateTime.now().subtract(const Duration(milliseconds: 250));
 
     for (AccelerometerEvent accel in accelerometerSamples.reversed) {
       count++;
@@ -146,6 +229,11 @@ class _SquatTaskState extends State<SquatTask> with TickerProviderStateMixin {
             style: textTheme.headlineLarge,
           ),
           const SizedBox(height: 16.0),
+          Text(
+            falseSquatAdmonish,
+            textAlign: TextAlign.center,
+            style: textTheme.headlineLarge?.copyWith(color: colorScheme.error),
+          ),
         ],
       ),
     );
