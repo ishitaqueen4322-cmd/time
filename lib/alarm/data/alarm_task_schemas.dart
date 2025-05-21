@@ -1,8 +1,10 @@
 import 'package:clock_app/alarm/types/alarm_task.dart';
+import 'package:clock_app/alarm/widgets/tasks/light_task.dart';
 import 'package:clock_app/alarm/widgets/tasks/math_task.dart';
 import 'package:clock_app/alarm/widgets/tasks/memory_task.dart';
 import 'package:clock_app/alarm/widgets/tasks/retype_task.dart';
 import 'package:clock_app/alarm/widgets/tasks/sequence_task.dart';
+import 'package:clock_app/alarm/widgets/tasks/squat_task.dart';
 import 'package:clock_app/settings/types/setting.dart';
 import 'package:clock_app/settings/types/setting_group.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -113,6 +115,26 @@ Map<AlarmTaskType, AlarmTaskSchema> alarmTaskSchemasMap = {
     ]),
     (onSolve, settings) {
       return MemoryTask(onSolve: onSolve, settings: settings);
+    },
+  ),
+  AlarmTaskType.squat: AlarmTaskSchema(
+    (context) => AppLocalizations.of(context)!.squatTask,
+    SettingGroup("squatSettings",
+        (context) => AppLocalizations.of(context)!.squatTask, [
+          NumberSetting("numberOfSquats", (context) => AppLocalizations.of(context)!.numberOfSquatsSetting, 10),
+    ]),
+    (onSolve, settings) {
+      return SquatTask(onSolve: onSolve, settings: settings);
+    },
+  ),
+  AlarmTaskType.lightSensor: AlarmTaskSchema(
+    (context) => AppLocalizations.of(context)!.lightTask,
+    SettingGroup("lightSensorSettings",
+        (context) => AppLocalizations.of(context)!.requiredLightLevelSetting, [
+          SliderSetting("targetLux", (context) => AppLocalizations.of(context)!.requiredLightLevelSetting, 0, 200, 100),
+    ]),
+    (onSolve, settings) {
+      return LightTask(onSolve: onSolve, settings: settings);
     },
   ),
 };

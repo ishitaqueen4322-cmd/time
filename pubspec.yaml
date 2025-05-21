@@ -22,7 +22,7 @@ dependencies:
   path_provider: ^2.0.11
   path: ^1.8.2
   sqflite: ^2.2.2
-  flutter_slidable: ^3.1.0
+  flutter_slidable: ^3.1.2
   flutter_system_ringtones: ^0.0.6
   # android_alarm_manager_plus: ^4.0.4
   android_alarm_manager_plus:
@@ -63,7 +63,7 @@ dependencies:
   receive_intent: ^0.2.5
   watcher: ^1.1.0
   dynamic_color: ^1.7.0
-  material_color_utilities: ^0.8.0
+  material_color_utilities: ^0.11.1
   flutter_oss_licenses: ^3.0.2  
   locale_names: ^1.1.1
   # home_widget: ^0.5.0
@@ -88,6 +88,8 @@ dependencies:
   mime: ^1.0.6
   analog_clock: ^0.1.1
   animated_analog_clock: ^0.1.0
+  sensors_plus: ^6.1.1
+  light_sensor: ^3.0.1
   # animated_reorderable_list: ^1.1.1
   # animated_reorderable_list:
     # path: "../animated_reorderable_list"
