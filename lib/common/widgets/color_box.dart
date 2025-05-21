@@ -7,7 +7,7 @@ class ColorBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  CardTheme cardTheme = Theme.of(context).cardTheme;
+  CardThemeData cardTheme = Theme.of(context).cardTheme;
 
     return Container(
       width: 36.0,
