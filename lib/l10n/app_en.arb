@@ -778,5 +778,19 @@
   "backgroundServiceIntervalSettingDescription": "Lower interval will help keep the app alive, at the cost of some battery life",
   "custom": "Custom",
   "app": "App",
-  "materialYou": "Material You"
+  "materialYou": "Material You",
+  "squatTask": "Squats",
+  "numberOfSquatsSetting": "Number of Squats",
+  "squatsCompleted": "Squats Completed",
+  "squatAdmonishmentKeepMovementSteady": "Be steady with your movement!",
+  "squatAdmonishmentKeepPhoneVertical": "Keep your phone steady and vertical!",
+  "squatAdmonishmentSquatTime": "Move slower!",
+  "squatAdmonishmentFullRangeMotion": "Make sure to have a full range of motion!",
+  "lightTask": "Light Sensor",
+  "requiredLightLevelSetting": "Required Light Level (lux)",
+  "lightProgressSemanticsLabel": "Percentage to Required lx",
+  "luxUnitSuffix": " lx",
+  "lightNoticeTurnOnLights": "Turn on the lights!",
+  "lightNoticeFaceScreen": "Face phone screen to the light",
+  "lightNoticeMoveCloser": "Move closer to light"
 }

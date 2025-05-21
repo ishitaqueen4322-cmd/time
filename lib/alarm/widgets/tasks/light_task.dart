@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:clock_app/common/widgets/linear_progress_bar.dart';
 import 'package:light_sensor/light_sensor.dart';
-import 'package:clock_app/common/widgets/card_container.dart';
 import 'package:clock_app/settings/types/setting_group.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LightTask extends StatefulWidget {
   const LightTask({
@@ -134,7 +134,7 @@ class _LightTaskState extends State<LightTask> with TickerProviderStateMixin {
                   style: textTheme.displayLarge,
                 ),
                 Text(
-                  " lx",
+                  AppLocalizations.of(context)!.luxUnitSuffix,
                   style: textTheme.displaySmall,
                 ),
               ]),
@@ -143,17 +143,17 @@ class _LightTaskState extends State<LightTask> with TickerProviderStateMixin {
             value: percentageThere,
             color: colorScheme.secondary,
             minHeight: 18,
-            semanticsLabel: "Percentage to Required lx",
+            semanticsLabel: AppLocalizations.of(context)!.lightProgressSemanticsLabel,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
             Text(
-              "0 lx",
+              _roundLux(0.0) + AppLocalizations.of(context)!.luxUnitSuffix,
               style: textTheme.displaySmall,
             ),
             Text(
-              "${_roundLux(targetLux)} lx",
+              _roundLux(targetLux) + AppLocalizations.of(context)!.luxUnitSuffix,
               style: textTheme.displaySmall,
             ),
           ]),
@@ -161,10 +161,10 @@ class _LightTaskState extends State<LightTask> with TickerProviderStateMixin {
           Text(
             textAlign: TextAlign.center,
             lightValue < 10
-                ? "Turn on the lights!"
+                ? AppLocalizations.of(context)!.lightNoticeTurnOnLights
                 : lightValue < 50
-                    ? "Face phone screen to the light"
-                    : "Move closer to light",
+                    ? AppLocalizations.of(context)!.lightNoticeFaceScreen
+                    : AppLocalizations.of(context)!.lightNoticeMoveCloser,
             style: textTheme.headlineLarge,
           ),
         ],

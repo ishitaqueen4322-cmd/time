@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:sensors_plus/sensors_plus.dart';
-import 'package:clock_app/common/widgets/card_container.dart';
 import 'package:clock_app/settings/types/setting_group.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SquatTask extends StatefulWidget {
   const SquatTask({
@@ -18,6 +18,13 @@ class SquatTask extends StatefulWidget {
 
   @override
   State<SquatTask> createState() => _SquatTaskState();
+}
+
+enum SquatAdmonishment {
+  fullRangeMotion,
+  squatTime,
+  keepPhoneVertical,
+  keepMovementSteady
 }
 
 class _SquatTaskState extends State<SquatTask> with TickerProviderStateMixin {
@@ -52,14 +59,14 @@ class _SquatTaskState extends State<SquatTask> with TickerProviderStateMixin {
 
   double oldAccelSecond = 0.0;
   DateTime? lastSquatTime;
-  String falseSquatAdmonish = "";
+  SquatAdmonishment? falseSquatAdmonish;
 
   bool _isFakeSquat(DateTime start, DateTime end) {
-    double average_accel_z = 0.0;
-    double average_accel_x = 0.0;
+    double averageAccelZ = 0.0;
+    double averageAccelX = 0.0;
     double count = 0.0;
 
-    double avg_jerk_y = 0.0;
+    double avgJerkY = 0.0;
 
     double squatTimeSeconds =
         end.difference(start).inMilliseconds.toDouble() / 1000.0;
@@ -83,50 +90,50 @@ class _SquatTaskState extends State<SquatTask> with TickerProviderStateMixin {
       if (accel.timestamp.isBefore(start)) break;
 
       count++;
-      average_accel_z += (accel.z - average_accel_z) / count;
-      average_accel_x += (accel.x - average_accel_x) / count;
+      averageAccelZ += (accel.z - averageAccelZ) / count;
+      averageAccelX += (accel.x - averageAccelX) / count;
 
       final Duration timeDifference =
           nextEvent.timestamp.difference(accel.timestamp);
       final double dtSeconds =
           (timeDifference.inMilliseconds.toDouble() / 1000.0);
 
-      final jerk_y = (nextEvent.y - accel.y) / dtSeconds;
-      avg_jerk_y += (jerk_y - avg_jerk_y) / count;
+      final jerkY = (nextEvent.y - accel.y) / dtSeconds;
+      avgJerkY += (jerkY - avgJerkY) / count;
 
       nextEvent = accel;
     }
 
     if(barRange <= 0.05) {
       setState(() {
-        falseSquatAdmonish = "Make sure to have a full range of motion!";
+        falseSquatAdmonish = SquatAdmonishment.fullRangeMotion;
       });
       return true;
     }
 
     if (squatTimeSeconds <= 1.0) {
       setState(() {
-        falseSquatAdmonish = "Move slower!";
+        falseSquatAdmonish = SquatAdmonishment.squatTime;
       });
       return true;
     }
 
-    if (average_accel_z.abs() >= 2 || average_accel_x.abs() >= 2) {
+    if (averageAccelZ.abs() >= 2 || averageAccelX.abs() >= 2) {
       setState(() {
-        falseSquatAdmonish = "Keep your phone steady and vertical!";
+        falseSquatAdmonish = SquatAdmonishment.keepPhoneVertical;
       });
       return true;
     }
 
-    if (avg_jerk_y.abs() >= 0.1) {
+    if (avgJerkY.abs() >= 0.1) {
       setState(() {
-        falseSquatAdmonish = "Be steady with your movement!";
+        falseSquatAdmonish = SquatAdmonishment.keepMovementSteady;
       });
       return true;
     }
 
     setState(() {
-      falseSquatAdmonish = "";
+      falseSquatAdmonish = null;
     });
     return false;
   }
@@ -196,6 +203,21 @@ class _SquatTaskState extends State<SquatTask> with TickerProviderStateMixin {
     _barStream.cancel();
   }
 
+  String _getAdmonishText(SquatAdmonishment? admonishment, BuildContext context) {
+    switch(admonishment) {
+      case null: 
+        return "";
+      case SquatAdmonishment.fullRangeMotion: 
+        return AppLocalizations.of(context)!.squatAdmonishmentFullRangeMotion;
+      case SquatAdmonishment.keepMovementSteady:
+        return AppLocalizations.of(context)!.squatAdmonishmentKeepMovementSteady;
+      case SquatAdmonishment.keepPhoneVertical:
+        return AppLocalizations.of(context)!.squatAdmonishmentKeepPhoneVertical;
+      case SquatAdmonishment.squatTime:
+        return AppLocalizations.of(context)!.squatAdmonishmentSquatTime;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
@@ -225,12 +247,12 @@ class _SquatTaskState extends State<SquatTask> with TickerProviderStateMixin {
                 ),
               ]),
           Text(
-            "Squats Completed",
+            AppLocalizations.of(context)!.squatsCompleted,
             style: textTheme.headlineLarge,
           ),
           const SizedBox(height: 16.0),
           Text(
-            falseSquatAdmonish,
+            _getAdmonishText(falseSquatAdmonish, context),
             textAlign: TextAlign.center,
             style: textTheme.headlineLarge?.copyWith(color: colorScheme.error),
           ),

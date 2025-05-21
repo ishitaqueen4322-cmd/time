@@ -118,20 +118,20 @@ Map<AlarmTaskType, AlarmTaskSchema> alarmTaskSchemasMap = {
     },
   ),
   AlarmTaskType.squat: AlarmTaskSchema(
-    (context) => "Squats",
+    (context) => AppLocalizations.of(context)!.squatTask,
     SettingGroup("squatSettings",
-        (context) => "Squats", [
-          NumberSetting("numberOfSquats", (context) => "Number of Squats", 10),
+        (context) => AppLocalizations.of(context)!.squatTask, [
+          NumberSetting("numberOfSquats", (context) => AppLocalizations.of(context)!.numberOfSquatsSetting, 10),
     ]),
     (onSolve, settings) {
       return SquatTask(onSolve: onSolve, settings: settings);
     },
   ),
   AlarmTaskType.lightSensor: AlarmTaskSchema(
-    (context) => "Light Sensor",
+    (context) => AppLocalizations.of(context)!.lightTask,
     SettingGroup("lightSensorSettings",
-        (context) => "Required Light Level (lux)", [
-          SliderSetting("targetLux", (context) => "Required Light Level (lux)", 0, 200, 100),
+        (context) => AppLocalizations.of(context)!.requiredLightLevelSetting, [
+          SliderSetting("targetLux", (context) => AppLocalizations.of(context)!.requiredLightLevelSetting, 0, 200, 100),
     ]),
     (onSolve, settings) {
       return LightTask(onSolve: onSolve, settings: settings);
