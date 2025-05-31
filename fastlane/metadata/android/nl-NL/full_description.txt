@@ -1,0 +1,35 @@
+<h2>Kenmerken</h2>
+<ul>
+<li>Moderne en gebruiksvriendelijke interface</li>
+</ul>
+<h3>Wekkers</h3>
+<ul>
+<li>Aangepaste schema's (dagelijks, wekelijks, specifieke weekdagen, specifieke data, datumbereik)</li>
+<li>Instelbare melodie, oplopend volume en trillingen</li>
+<li>Instelbare sluimerduur en maximaal aantal sluimerperiodes</li>
+<li>Wekkertaken (rekenkundige problemen, tekst typen, volgorde, meer volgt)</li>
+<li>Wekkers filteren (alle, vandaag, morgen, sluimerend , uitgeschakeld, voltooid)</li>
+</ul>
+<h3>Klok</h3>
+<ul>
+<li>Aangepaste klokweergave</li>
+<li>Wereldklokken met relatieve tijdsverschillen</li>
+<li>Steden zoeken en toevoegen</li>
+</ul>
+<h3>Timer</h3>
+<ul>
+<li>Instelbare melodie, oplopend volume en trillingen</li>
+<li>Voorinstellingen</li>
+<li>Timers filteren (alle, lopende, gepauzeerde, gestopte)</li>
+</ul>
+<h3>Stopwatch</h3>
+<ul>
+<li>Rondetijden met rondetijden en verstreken tijd</li>
+<li>Rondes vergelijken</li>
+</ul>
+<h3>Uiterlijk</h3>
+<ul>
+<li>Material You-thema's</li>
+<li>Aanpasbare kleurthema's</li>
+<li>Aanpasbare stijlen thema's</li>
+</ul>
