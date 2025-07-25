@@ -37,6 +37,7 @@ class CustomListView<Item extends ListItem> extends StatefulWidget {
     this.initialSortIndex = 0,
     this.onChangeSortIndex,
     this.header,
+    this.bottomInset = 0,
   });
 
   final List<Item> items;
@@ -60,6 +61,7 @@ class CustomListView<Item extends ListItem> extends StatefulWidget {
   final Function(int index)? onChangeSortIndex;
   final Widget? header;
   final bool isSelectable;
+  final double bottomInset;
 
   @override
   State<CustomListView> createState() => _CustomListViewState<Item>();
@@ -387,8 +389,12 @@ class _CustomListViewState<Item extends ListItem>
                 proxyDecorator: (widget, index, animation) =>
                     reorderableListDecorator(context, widget),
                 items: currentList,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: EdgeInsets.only(
+                  left: 16,
+                  top: 8,
+                  right: 16,
+                  bottom: widget.bottomInset + 8,
+                ),
                 isSameItem: (a, b) => a.id == b.id,
                 scrollDirection: Axis.vertical,
                 itemBuilder: _getItemBuilder(),
