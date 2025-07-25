@@ -104,6 +104,7 @@ class _ClockScreenState extends State<ClockScreen> {
             placeholderText: "No cities added",
             isDuplicateEnabled: false,
             isSelectable: true,
+            bottomInset: FAB.bottomInset(context),
           ),
         ),
       ]),

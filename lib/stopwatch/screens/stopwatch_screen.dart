@@ -166,6 +166,7 @@ class _StopwatchScreenState extends State<StopwatchScreen> {
                 isDuplicateEnabled: false,
                 isReorderable: false,
                 onAddItem: (lap) => _stopwatch.updateFastestAndSlowestLap(),
+                bottomInset: FAB.bottomInset(context, size: 2),
               ),
             ),
           ],

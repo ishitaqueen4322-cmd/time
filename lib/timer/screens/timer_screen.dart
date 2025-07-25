@@ -108,7 +108,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 //   }
 // }
 
-
 class TimerScreen extends StatefulWidget {
   const TimerScreen({super.key, this.actionController});
 
@@ -410,6 +409,7 @@ class _TimerScreenState extends State<TimerScreen> {
               listFilters: _showFilters.value ? timerListFilters : [],
               sortOptions: _showSort.value ? timerSortOptions : [],
               customActions: _getCustomActions(),
+              bottomInset: FAB.bottomInset(context),
             ),
           ),
         ],

@@ -7,6 +7,10 @@ import 'package:flutter/material.dart';
 
 enum FabPosition { bottomLeft, bottomRight }
 
+const double _kIconSize = 24.0;
+const double _kMaterialStyleBottomPadding = 20.0;
+const double _kPadding = 16.0;
+
 class FAB extends StatefulWidget {
   const FAB({
     super.key,
@@ -27,6 +31,24 @@ class FAB extends StatefulWidget {
 
   @override
   State<FAB> createState() => _FABState();
+
+  static double bottomInset(
+    BuildContext context, {
+    int size = 1,
+    double bottomPadding = 0,
+  }) {
+    ThemeData theme = Theme.of(context);
+    ThemeSettingExtension themeSettings =
+        theme.extension<ThemeSettingExtension>()!;
+
+    const paddingHeight = 2 * _kPadding;
+    final iconHeight = _kIconSize * size;
+    final totalHeight = bottomPadding + paddingHeight + iconHeight;
+
+    return themeSettings.useMaterialStyle
+        ? totalHeight + _kMaterialStyleBottomPadding
+        : totalHeight;
+  }
 }
 
 class _FABState extends State<FAB> {
@@ -65,27 +87,27 @@ class _FABState extends State<FAB> {
         : widget.position;
 
     double bottomPadding = themeSettings.useMaterialStyle
-        ? widget.bottomPadding + 20
+        ? widget.bottomPadding + _kMaterialStyleBottomPadding
         : widget.bottomPadding;
 
     return Positioned(
       bottom: bottomPadding,
       right: position == FabPosition.bottomRight
-          ? 16 + (widget.index * 24 * widget.size) + widget.index * 36
+          ? 16 + (widget.index * _kIconSize * widget.size) + widget.index * 36
           : null,
       left: position == FabPosition.bottomLeft
-          ? 16 + (widget.index * 24 * widget.size) + widget.index * 36
+          ? 16 + (widget.index * _kIconSize * widget.size) + widget.index * 36
           : null,
       child: CardContainer(
         elevationMultiplier: 2,
         color: colorScheme.primary,
         onTap: widget.onPressed,
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(_kPadding),
           child: Icon(
             widget.icon,
             color: colorScheme.onPrimary,
-            size: 24 * widget.size,
+            size: _kIconSize * widget.size,
           ),
         ),
       ),
