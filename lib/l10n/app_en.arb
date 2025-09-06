@@ -553,6 +553,8 @@
   "@dismissActionButtons": {},
   "dismissActionAreaButtons": "Area Buttons",
   "@dismissActionAreaButtons": {},
+  "dismissActionAreaFatSnoozeButtons": "Area Fat Snooze Buttons",
+  "@dismissActionAreaFatSnoozeButtons": {},
   "stopwatchTimeFormatSettingGroup": "Time Format",
   "@stopwatchTimeFormatSettingGroup": {},
   "stopwatchShowMillisecondsSetting": "Show Milliseconds",
