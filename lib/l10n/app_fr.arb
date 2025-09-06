@@ -505,6 +505,8 @@
   "@dismissActionButtons": {},
   "dismissActionAreaButtons": "Boutons larges",
   "@dismissActionAreaButtons": {},
+  "dismissActionAreaFatSnoozeButtons": "Boutons Snooze larges",
+  "@dismissActionAreaFatSnoozeButtons": {},
   "comparisonLapBarsSettingGroup": "Comparaison des tours",
   "@comparisonLapBarsSettingGroup": {},
   "showPreviousLapSetting": "Afficher le tour précédent",
