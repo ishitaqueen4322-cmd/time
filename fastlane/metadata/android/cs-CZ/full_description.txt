@@ -1,0 +1,35 @@
+<h2>Funkce</h2>
+<ul>
+<li>Moderní a snadno použitelné rozhraní</li>
+</ul>
+<h3>Budíky</h3>
+<ul>
+<li>Přizpůsobitelné plány (denní, týdenní, konkrétní dny v týdnu, konkrétní data, rozsah dat)</li>
+<li>Konfigurace melodie, zvyšující se hlasitosti a vibrací</li>
+<li>Konfigurace délky odložení a maximálního počtu odložení</li>
+<li>Úkoly budíku (matematické příklady, přepisování textu, sekvence, další budou následovat)</li>
+<li>Filtrování budíků (všechny, dnes, zítra, odložené, vypnuté, dokončené)</li>
+</ul>
+<h3>Hodiny</h3>
+<ul>
+<li>Přizpůsobitelné zobrazení hodin</li>
+<li>Světové hodiny s relativním časovým posunem</li>
+<li>Vyhledávání a přidávání města</li>
+</ul>
+<h3>Časovač</h3>
+<ul>
+<li>Konfigurace melodie, zvyšující se hlasitosti a vibrací</li>
+<li>Předvolby časovače</li>
+<li>Filtrování časovačů (všechny, běžící, pozastavené, zastavené)</li>
+</ul>
+<h3>Stopky</h3>
+<ul>
+<li>Historie kol s časy kol a uplynulými časy</li>
+<li>Porovnání kol</li>
+</ul>
+<h3>Vzhled</h3>
+<ul>
+<li>Material You motivy</li>
+<li>Vysoce přizpůsobitelné barevné motivy</li>
+<li>Vysoce přizpůsobitelné stylové motivy</li>
+</ul>
