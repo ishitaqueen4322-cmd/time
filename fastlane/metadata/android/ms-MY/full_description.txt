@@ -1,0 +1,36 @@
+<h2>Ciri-ciri</h2>
+<ul>
+<li>Antaramuka yang moden dan mudah digunakan</li>
+</ul>
+<h3>Penggera</h3>
+<ul>
+<li>Jadual boleh diubahsuai (harian, mingguan, hari tertentu, tarikh tertentu, julat tarikh)</li>
+<li>Tetapan melodi, tingkatkan bunyi dan getaran</li>
+<li>Tetapan jarak tunda dan maksimum waktu tunda</li>
+<li>Tugasan penggera (penyelesaian matematik, taip semula teks, jujukan, akan menyusul lagi nanti)</li>
+<li>Tapis penggera (semua, hari ini, esok, ditunda, nyahdaya, lengkap)</li>
+</ul>
+<h3>Jam</h3>
+<ul>
+<li>Paparan jam mudah diubahusia</li>
+<li>Jam dunia dengan perbezaan masa relatif</li>
+<li>Cari dan tambah bandar</li>
+</ul>
+<h3>Pemasa</h3>
+<ul>
+<li>Tetapan melodi, tingkatkan bunyi dan getaran</li>
+<li>Tetapan awal pemasa</li>
+<li>Tapis pemasa (semua, sedang berlangsung, dijeda, berhenti)</li>
+</ul>
+<h3>Jam randik</h3>
+<ul>
+<li>Sejarah pusingan dengan masa pusingan dan masa keseluruhan</li>
+<li>Bandingan pusingan</li>
+</ul>
+<h3>Penampilan</h3>
+<ul>
+<li>Tema Material You</li>
+<li>Tema warna yang sangat boleh disesuaikan</li>
+<li>Tema gaya yang sangat boleh disesuaikan</li>
+
+</ul>

@@ -1,0 +1,40 @@
+<h2>Gnéithe</h2>
+<ul>
+<li>Comhéadan nua-aimseartha atá éasca le húsáid</li>
+</ul>
+
+<h3>Aláraim</h3>
+<ul>
+<li>Sceidil in-saincheaptha (laethúil, seachtainiúil, laethanta seachtaine ar leith, dátaí ar leith, raon dátaí)</li>
+<li>Cumraigh fonn, toirt mhéadaitheach agus creathanna</li>
+<li>Cumraigh fad an tsníomhtha agus líon uasta na sníomhtha</li>
+<li>Tascanna aláraim (fadhbanna matamaitice, téacs a chlóscríobh arís, seicheamh, agus tuilleadh le teacht)</li>
+<li>Scag aláraim (uile, inniu, amárach, curtha ar shníomh, díchumasaithe, críochnaithe)</li>
+</ul>
+
+<h3>Clog</h3>
+<ul>
+<li>Taispeáint chloig in-saincheaptha</li>
+<li>Cloig dhomhanda le difríocht ama choibhneasta</li>
+<li>Cuardaigh agus cuir cathracha leis</li>
+</ul>
+
+<h3>Uaineadóir</h3>
+<ul>
+<li>Cumraigh fonn, toirt mhéadaitheach agus creathanna</li>
+<li>Réamhshocruithe uaineadóra</li>
+<li>Scag uaineadóirí (uile, ag rith, curtha ar sos, stoptha)</li>
+</ul>
+
+<h3>Staduaireadóir</h3>
+<ul>
+<li>Stair na mbabhtaí le hamanna babhtaí agus amanna caite</li>
+<li>Comparáidí babhtaí</li>
+</ul>
+
+<h3>Cuma</h3>
+<ul>
+<li>Téamaí Material You</li>
+<li>Téamaí dathanna an-in-saincheaptha</li>
+<li>Téamaí stíle an-in-saincheaptha</li>
+</ul>

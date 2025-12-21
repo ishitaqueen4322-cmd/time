@@ -1,0 +1,35 @@
+<h2>Funcionalidades</h2>
+<ul>
+<li>Interface moderna e fácil de usar</li>
+</ul>
+<h3>Alarmes</h3>
+<ul>
+<li>Agendamentos personalizáveis (diário, semanal, dias específicos da semana, datas específicas, intervalo de datas)</li>
+<li>Configurar melodia, aumento gradual de volume e vibrações</li>
+<li>Configurar duração e máximo de sonecas</li>
+<li>Tarefas de alarme (problemas de matemática, redigitar texto, sequência, mais em breve)</li>
+<li>Filtrar alarmes (todos, hoje, amanhã, em soneca, desativados, concluídos)</li>
+</ul>
+<h3>Relógio</h3>
+<ul>
+<li>Exibição de relógio personalizável</li>
+<li>Relógios mundiais com diferença de horário relativa</li>
+<li>Pesquisar e adicionar cidades</li>
+</ul>
+<h3>Timer</h3>
+<ul>
+<li>Configurar melodia, aumento gradual de volume e vibrações</li>
+<li>Predefinições de timer</li>
+<li>Filtrar timers (todos, em execução, pausados, parados)</li>
+</ul>
+<h3>Cronômetro</h3>
+<ul>
+<li>Histórico de voltas com tempos de volta e tempos decorridos</li>
+<li>Comparações de voltas</li>
+</ul>
+<h3>Aparência</h3>
+<ul>
+<li>Temas Material You</li>
+<li>Temas com cores altamente personalizáveis</li>
+<li>Temas com estilo altamente personalizáveis</li>
+</ul>
