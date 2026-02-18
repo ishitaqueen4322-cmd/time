@@ -32,7 +32,7 @@ dependencies:
       path: packages/android_alarm_manager_plus
       ref: alarm_show_intent
   just_audio: ^0.9.31
-  awesome_notifications: ^0.9.3
+  awesome_notifications: ^0.9.2
   # awesome_notifications:
   #   path: "../awesome_notifications"
   audio_session: ^0.1.13
