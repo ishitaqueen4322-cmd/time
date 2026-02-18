@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "803423290567",
+    "project_id": "timer-ab593",
+    "storage_bucket": "timer-ab593.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:803423290567:android:59a59955afc2e2d0c92ae2",
+        "android_client_info": {
+          "package_name": "com.vicolo.chrono"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYy1v7HKIS8O-Wzcoy1kDAP4dVQVeT-m8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
